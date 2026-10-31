@@ -1,16 +1,12 @@
 export function esPinValido(pin) {
 
-    if (typeof pin !== 'string' || pin.length === 0) {
+    if (typeof pin !== 'string') {
         return false;
     }
 
-    if (!/^\d{4}$|^\d{6}$/.test(pin)) {
-        return false;
-    }
+    const longitudValida = [4, 6].includes(pin.length);
+    const soloDigitos = /^\d+$/.test(pin);
+    const digitosIguales = /^(\d)\1+$/.test(pin);
 
-    if (/^(\d)\1+$/.test(pin)) {
-        return false;
-    }
-
-    return true;
-} 
+    return longitudValida && soloDigitos && !digitosIguales;
+}
